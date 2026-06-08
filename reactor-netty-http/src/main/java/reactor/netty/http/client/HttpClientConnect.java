@@ -575,7 +575,7 @@ class HttpClientConnect extends HttpClient {
 				}
 
 				Consumer<HttpClientRequest> consumer = null;
-				if (fromURI != null && !toURI.equals(fromURI)) {
+				if (fromURI != null && (!toURI.equals(fromURI) || (fromURI.isSecure() && !toURI.isSecure()))) {
 					if (handler instanceof RedirectSendHandler) {
 						headers.remove(HttpHeaderNames.EXPECT)
 						       .remove(HttpHeaderNames.COOKIE)
