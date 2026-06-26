@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2017-2023 VMware, Inc. or its affiliates, All Rights Reserved.
+ * Copyright (c) 2017-2026 VMware, Inc. or its affiliates, All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -575,7 +575,7 @@ class HttpClientConnect extends HttpClient {
 				}
 
 				Consumer<HttpClientRequest> consumer = null;
-				if (fromURI != null && !toURI.equals(fromURI)) {
+				if (fromURI != null && (!toURI.equals(fromURI) || (fromURI.isSecure() && !toURI.isSecure()))) {
 					if (handler instanceof RedirectSendHandler) {
 						headers.remove(HttpHeaderNames.EXPECT)
 						       .remove(HttpHeaderNames.COOKIE)
